@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block container_busiest %}
+    <div>
+        <h3>Top 10 Busiest Airport</h3>
+        <br>
+        <table class="table table-boarded table-dark">
+            <thead align="center">
+                <tr>
+                    <th scope="col">Airport</th>
+                    <th scope="col">No. of Flights</th>
+                    <th scope="col">City</th>
+
+                </tr>
+            </thead>
+            <tbody align="center">
+                {% for n in result%}
+                    <tr>
+                        <th scope="row">{{n.airport}}</th>
+                        <td>{{n.total_flight}}</td>
+                        <td>{{n.city}}</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

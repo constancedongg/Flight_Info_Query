@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% block container %}
+
+    <div>
+        
+        <medium>Search results for {{returned_user}}</medium>
+        <table class="table table-boarded table-dark">
+            <thead align="center">
+                <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">Request ID</th>
+                    <th scope="col">Origin</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Preference</th>
+                </tr>
+            </thead>
+            <tbody align="center">
+                {% for n in result%}
+                    <tr>
+                        <th scope="row">{{n.email_address}}</th>
+                        <td>{{n.request_id}}</td>
+                        <td>{{n.origin}}</td>
+                        <td>{{n.destination}}</td>
+                        <td>{{n.date}}</td>
+                        <td>{{n.preference}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

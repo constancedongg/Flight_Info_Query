@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+<!-- {% set active_page = "menu2" %} -->
+
+{% block container_flight %}
+    <div>
+        <h3>Flight search results</h3>
+        <br>
+        <table class="table table-boarded table-dark">
+            <thead align="center">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Flight Number</th>
+                    <th scope="col">Origin</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Departure Time</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Duration (mins)</th>
+                </tr>
+            </thead>
+            <tbody align="center">
+                {% for n in flight%}
+                    <tr>
+                        <th scope="row">{{n.date}}</th>
+                        <td>{{n.flight_no}}</td>
+                        <td>{{n.from}}</td>
+                        <td>{{n.to}}</td>
+                        <td>{{n.departure_time}}</td>
+                        <td>{{n.arrival_time}}</td>
+                        <td>{{n.duration}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+<!-- {% set active_page = "menu4" %} -->
+
+{% block container_popular %}
+    <div>
+        <h3>Top5 most popular airlines.</h3>
+        <br>
+        <table class="table table-boarded table-dark">
+            <thead align="center">
+                <tr>
+                    <th scope="col">Airline</th>
+                    <th scope="col">No. of Flights</th>
+
+                </tr>
+            </thead>
+            <tbody align="center">
+                {% for n in result%}
+                    <tr>
+                        <th scope="row">{{n.airline_carrier}}</th>
+                        <td>{{n.no_flights}}</td>
+
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

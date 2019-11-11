@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    </head>
+    <script>
+        $(document).ready(function(){
+            $('a[data-toggle="pill"]').on('show.bs.tab', function(e) {
+                localStorage.setItem('activeTab', $(e.target).attr('href'));
+            });
+            var activeTab = localStorage.getItem('activeTab');
+            if(activeTab){
+                $('#myTab a[href="' + activeTab + '"]').tab('show');
+            }
+        });
+    </script>
+
+
+    <body>
+        <br>
+        <div class="page-header" align="justify">
+            <h1>Flight Information Query System</h1>
+            <p><font size="+1.5">Welcome to the Flight Information Query Application!</font></p>
+
+            <ul class="nav nav-pills nav-fill">
+                <li class="active"><a data-toggle="pill" href="#home"><font size="+1.5">Home</font></a></li>
+                <li><a data-toggle="pill" href="#menu1"><font size="+1.5">Historical Queries (Returned Users)</font></a></li>
+                <li><a data-toggle="pill" href="#menu2"><font size="+1.5">Flight Information</font></a></li>
+                <li><a data-toggle="pill" href="#menu3"><font size="+1.5">Recommendation</font></a></li>
+                <li><a data-toggle="pill" href="#menu4"><font size="+1.5">Interesting Facts!</font></a></li>
+            </ul>
+    
+        </div>
+        <br>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>HOME</h3>
+                <font size="+1">Our app provides searching functions including 
+                    historical queries for returned users and flight inforamtion, recommendation
+                    functions like recommende airlines by inputting departure and arrival, and etc. 
+                    Our data is extracted from <a href = "https://www.bts.gov/">Bureau of Transportation Statistics.</a>
+                </font>
+            </div>
+
+
+            <div id="menu1" class="tab-pane fade">
+                <h3>Search Historical Queries for Returned Users</h3>
+                <font size="+0.5">This function is desgined for returned users to search for their historical queries.</font>
+                <br> <br>
+                <form method="POST" action="/returned" align="center">
+                    <p>Email Address: <input type="text" name="email"> <input type="submit" value="Search"></p>
+                </form>
+
+                <div class="container">
+                    {% block container %}{% endblock %}
+                </div>
+            </div>
+
+
+            <div id="menu2" class="tab-pane fade">
+                <h3>Flight Information</h3>
+                <p>This function is desgined for users to search for historical flight information.</p>
+                <br> <br>
+                <form method="POST" action="/search" align="left">
+                    <div class="form-group"> 
+                        <label for="from">From</label> 
+                        <input class="form-control" type="text" id="departure_rec" name="departure" placeholder="e.g JFK"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <label for="to">To</label> 
+                        <input class="form-control" type="text" id="arrival_rec" name="arrival" placeholder="e.g ATL"> 
+                    </div> 
+
+                    <div class="form-group"> 
+                        <label for="date">Date</label> 
+
+                        <input class="form-control" type="date" id="date_rec" name="date" value="2018-01-01" min="2018-01-01" max="2018-01-31">
+                    </div> 
+                    <br><br>
+
+                    <medium>Sort results by: </medium>
+
+                    <div class="container" align="left">
+                        <input type="radio" name="sort" id="default_sort" value="default">Default</input>&nbsp;&nbsp;&nbsp;   
+                        <input type="radio" name="sort" id="shortest_duration_sort" value="shortest_duration">Fastest</input>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="sort" id="earliest_departure_sort" value="earliest_departure">Earliest</input>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="sort" id="latest_departure_sort" value="latest_departure">Latest</input>&nbsp;&nbsp;&nbsp;
+                        <br>
+                    </div>
+                    <br> <br>
+                    
+                    <input type="submit" name="action" value="Search">
+
+               </form> 
+
+               <div class="container">
+                    {% block container_flight %}{% endblock %}
+                </div>
+
+            </div>
+                
+
+
+
+            <div id="menu3" class="tab-pane fade">
+                <h3>Recommend Airlines</h3>
+                <p>This function is to recommend airlines by user input.</p>
+                <br> <br>
+
+                <form method="POST" action="/recommend" align="left">
+                    <div class="form-group"> 
+                        <label for="from">From</label> 
+                        <input class="form-control" type="text" name="departure" id="departure_rec" placeholder="e.g JFK"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <label for="to">To</label> 
+                        <input class="form-control" type="text" name="arrival" id="arrival_rec" placeholder="e.g ATL"> 
+                    </div> 
+
+                    <div class="form-group"> 
+                        <label for="date">Date</label> 
+
+                        <input class="form-control" type="date" name="date" id="date_rec" value="2018-01-01" min="2018-01-01" max="2018-01-31">
+                    </div> 
+
+
+                    <br><br> 
+                    <input type="submit" name="action" value="Enter">
+
+                </form>
+
+                <div class="container">
+                    {% block container_recommend %}{% endblock %}
+                </div>
+
+
+            </div>
+        
+        
+            <div id="menu4" class="tab-pane fade" align="center">
+                <p>Do you know Top10 busiest airports?</p>
+                <form method="GET" action="/top10_airports">
+                    <input type="submit" value="Explore!">
+                </form>
+                <br><br>
+
+                <div class="container">
+                    {% block container_busiest %}{% endblock %}
+                </div>
+
+                <br><br>               
+
+
+                <p>Do you know Top5 most popular airlines?</p>
+                <form method="GET" action="/top5_airlines">
+                    <input type="submit" value="Explore!">
+                </form>
+                <br><br>
+
+                <div class="container">
+                    {% block container_popular %}{% endblock %}
+                </div>
+
+                <br><br>   
+
+
+                <p>Do you know airlines with longest average delay?</p>
+                <form method="GET" action="/longest_delay">
+                    <input type="submit" value="Explore!">
+                </form>
+
+                <div class="container">
+                    {% block container_worst %}{% endblock %}
+                </div>
+
+            </div>
+
+            
+
+
+        </div>
+
+
+</html>
+

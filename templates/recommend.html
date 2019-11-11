@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+<!-- {% set active_page = "menu3" %} -->
+
+{% block container_recommend %}
+    <div>
+        <h3>Airline recommendations by average delay and duration</h3>
+        <br><br>
+        <p><font size="+1.5">
+            <b>3 Criteria for recommendations: </b><br />
+                        1. Shortest average delay<br />
+                        2. Highest manager ratio (no. of managers/no.of employees)<br /> 
+                        3. Shortest average durations<br />
+        </font></p>
+        <br><br>
+        <table class="table table-boarded table-dark">
+            <thead align="center">
+                <tr>
+                    <th scope="col">Airline ID</th>
+                    <th scope="col">Airline Name</th>
+                    <th scope="col">Average Delay (mins)</th>
+                    <th scope="col">Manager Ratio</th>
+                    <th scope="col">Average Duration (mins)</th>
+                    <th scope="col">Score</th>
+                    <th scope="col">Rank</th>
+                </tr>
+            </thead>
+            <tbody align="center">
+                {% for n in flight%}
+                    <tr>
+                        <th scope="row">{{n.airline_id}}</th>
+                        <td>{{n.carrier_name}}</td>
+                        <td>{{n.avg_delay}}</td>
+                        <td>{{n.ratio}}</td>
+                        <td>{{n.avg_duration}}</td>
+                        <td>{{n.score}}</td>
+                        <td>{{n.rank}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

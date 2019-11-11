@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+<!-- {% set active_page = "menu4" %} -->
+
+{% block container_worst %}
+    <div>
+        <h3>Airlines with longest average delay.</h3>
+        <br>
+        <table class="table table-boarded table-dark">
+            <thead align="center">
+                <tr>
+                    <th scope="col">Airline</th>
+                    <th scope="col">Average delay (mins)</th>
+
+                </tr>
+            </thead>
+            <tbody align="center">
+                {% for n in result%}
+                    <tr>
+                        <th scope="row">{{n.airline_carrier}}</th>
+                        <td>{{n.avg_arrival_delay}}</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
