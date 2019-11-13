@@ -2,7 +2,6 @@
 
 ##
 ##
-##
 #### Description
 There are 5 navigation tabs on our web page, and we basically cover all the functions we mentioned at Part 1. 
 
